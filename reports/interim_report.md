@@ -64,17 +64,21 @@ Each row includes:
 - Format: `Date (str), Price (float)`
 - Converted to datetime and log returns for modeling
 
-### 🧠 Change Point Model
+### 🔹 Why Change Point Modeling?
 
-- Detects structural breaks (e.g., in mean or variance)
-- Uses Bayesian inference via MCMC sampling (PyMC3)
-- Outputs: Posterior distribution over change point date (`tau`), means before/after (`mu_1`, `mu_2`)
+Change point models help detect **structural breaks** — sudden changes in the mean or variance of a time series. These breakpoints often coincide with real-world events like economic crises or political instability. They allow us to:
 
-### 🧪 Expected Results
+- Quantify **how behavior changes** (e.g., mean or volatility shift)
+- Estimate **when** the market regime changed
+- Build **narratives** supported by data
 
-- Date of most probable change
-- Mean price difference (%)
-- Probabilistic interpretation of market shifts
+### 🧪 Expected Outputs
+
+- `tau`: the change point date
+- `mu_1` and `mu_2`: mean before/after the change
+- `sd_1` and `sd_2` (optional): volatility before/after
+- Posterior distributions for all parameters
+- Visual confidence about when change likely occurred
 
 ---
 
