@@ -69,7 +69,7 @@ brent-price-change-analysis/
 
 ## 📊 Dashboard Preview
 
-![Log Return with Change Points](./figures/dashboard.png)
+![Log Return with Change Points](/figures/dashboard.PNG)
 
 Features:
 
