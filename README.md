@@ -1,7 +1,3 @@
-**Week 10 KAIM challenge repo**, structured for clarity and professionalism:
-
----
-
 # Brent Oil Price Change Analysis 🛢️📈
 
 A data science project analyzing the impact of major geopolitical and economic events on Brent crude oil prices using **Bayesian Change Point Detection**. Developed for the **10 Academy KAIM Week 10 Challenge**.
@@ -23,27 +19,23 @@ The goal is to help **investors, analysts, and policymakers** make better-inform
 
 ## 🧠 Key Features
 
-- 📊 Interactive **React dashboard** (with Recharts)
-- 🔍 **Bayesian inference with PyMC3** to detect change points
-- 🗃️ Event-matching logic to associate shifts with real events
-- 📑 Well-structured analysis workflow & reporting
+- 📊 Interactive **React dashboard** to explore data trends and event impacts
+- 🔍 **Bayesian inference using PyMC** to detect structural change points
+- 🗃️ Event-matching logic to link historical shifts with real events
+- 📑 Cleanly organized analysis workflow with saved model outputs
 
 ---
 
 ## 📁 Repository Structure
 
 brent-price-change-analysis/
-├── backend/ # Flask API and Bayesian model (PyMC3)
-├── frontend/ # React + TypeScript dashboard
-├── data/
-│ ├── brent_prices.csv
-│ └── key_events.csv
-├── notebooks/
-│ └── eda.ipynb
-├── reports/  
-│ ├── interim_report.md
-│ └── log_return_events.png
-├── reports/ # Interim/final reports
+├── backend/ # Flask API with PyMC modeling outputs
+│ └── routes/api.py
+├── frontend/ # React + Tailwind dashboard
+├── data/ # Raw & transformed CSVs
+├── outputs/ # change_points.json, regimes.json, metrics.json
+├── notebooks/ # EDA and modeling notebooks
+├── reports/ # Final report and figures
 └── README.md
 
 ---
@@ -52,72 +44,100 @@ brent-price-change-analysis/
 
 ### 📦 Frontend
 
-- React.js with TypeScript
+- React.js (Vite)
 - Tailwind CSS
-- Recharts
+- Recharts + Axios
 
 ### 🧠 Backend
 
-- Flask (Python)
-- PyMC3 for Bayesian modeling
-- Pandas, NumPy
+- Flask + Flask-CORS
+- PyMC (Bayesian change point detection)
+- Pandas, ArviZ
 
 ---
 
-## 📈 Sample Workflow
+## 📈 Workflow Summary
 
-1. **Load Brent oil daily price data** (1987–2022)
-2. **Overlay key events** (wars, OPEC meetings, crises)
-3. **Run PyMC3 Bayesian Change Point Detection**
-4. **Quantify and visualize** changes in price structure
-5. **Display insights** in a web dashboard
+1. **Load and transform** daily Brent oil data (log returns)
+2. **Detect change points** using a PyMC Bayesian model
+3. **Match detected changes** to historical events
+4. **Quantify regime shifts** in terms of % impact
+5. **Save artifacts** (JSON, CSV) for dashboard integration
+6. **Build an interactive React dashboard**
 
 ---
 
-## 📅 Key Dates
+## 📊 Dashboard Preview
 
-- 📝 Interim Submission: **01 August 2025, 20:00 UTC**
-- 📊 Final Submission: **05 August 2025, 20:00 UTC**
+![Log Return with Change Points](./figures/dashboard.png)
+
+Features:
+
+- Red vertical lines for detected change points
+- Historical events overlaid (optional filter)
+- Mean return bands (`μ₁–μ₄`) shown across regimes
+
+---
+
+## 🚦 How to Run Locally
+
+### 1. Run Backend (Flask API)
+
+```
+cd backend
+python3 -m venv venv
+source venv/bin/activate
+pip install flask flask-cors pandas
+python app.py
+```
+
+Runs on: [http://localhost:5000](http://localhost:5000)
+
+### 2. Run Frontend (React + Vite)
+
+```
+cd frontend
+npm install
+npm run dev
+```
+
+Open in browser: [http://localhost:5173](http://localhost:5173)
+
+---
+
+## 💾 Key Data Artifacts
+
+- `price_returns.csv` — cleaned log return data
+- `key_events.csv` — curated geopolitical/economic events
+- `change_points.json` — dates + labels of detected change points
+- `regimes.json` — segmented periods with mean return (`μ`) per regime
+- `metrics.json` — volatility, min/max, stats summary
+- `model_trace.nc` — optional PyMC posterior samples
+
+All outputs are stored in `outputs/` for backend access.
+
+---
+
+## ✅ Task Status
+
+| Task                          | Status  |
+| ----------------------------- | ------- |
+| Task 1: Data Prep & EDA       | ✅ Done |
+| Task 2: Bayesian Modeling     | ✅ Done |
+| Task 3: Interactive Dashboard | ✅ Done |
 
 ---
 
 ## 🧠 Learning Outcomes
 
-- Bayesian inference & MCMC
-- Statistical modeling of time series
-- React dashboard design for data storytelling
-- Communicating insights to stakeholders
+- Bayesian time-series modeling using PyMC
+- Flask API design and serving model results
+- React + Recharts dashboard development
+- Data storytelling through interactive visualization
 
 ---
 
-## 👥 Contributors
+## 🗎 Reports
 
-- Mesfin Mulugeta (Data Scientist @ KAIM)
-- 10 Academy Mentors: Mahlet, Rediet, Kerod, Rehmet
-
----
-
-## 📌 Notes
-
-- This project uses mock data in early stages.
-- Real analysis begins once PyMC3 modeling is integrated.
-
----
-
-## 📌 Task 1: Laying the Foundation — ✅ Completed
-
-- ✅ Defined full data science workflow
-- ✅ Compiled and structured 15 key geopolitical and economic oil market events (`key_events.csv`)
-- ✅ Performed EDA:
-  - Price trend visualization
-  - Log return transformation
-  - Stationarity testing using ADF
-  - Volatility spike detection
-- ✅ Overlaid key event markers on the log return chart
-- ✅ Documented everything in `interim_report.md`
-
-# Visuals
-
-### 📷 Key Plot: Log Return Volatility with Events
-
-![Log Return with Events](./figures/brent_log_returns_with_events.png)
+- 📄 [`reports/final_report.md`](./reports/final_report.md) — Full project report
+- 📊 [`outputs/`](./outputs/) — All model results & visualizations

@@ -1,0 +1,26 @@
+[
+    {
+        "segment": "mu_1",
+        "start_date": "1987-05-20",
+        "end_date": "1997-06-18",
+        "avg_log_return": -0.0013734253471819199
+    },
+    {
+        "segment": "mu_2",
+        "start_date": "1997-06-18",
+        "end_date": "2008-08-11",
+        "avg_log_return": 0.0007638026480774119
+    },
+    {
+        "segment": "mu_3",
+        "start_date": "2008-08-11",
+        "end_date": "2008-12-17",
+        "avg_log_return": -0.013735219277597516
+    },
+    {
+        "segment": "mu_4",
+        "start_date": "2008-12-17",
+        "end_date": "2022-11-14",
+        "avg_log_return": 0.000259058941582066
+    }
+]
