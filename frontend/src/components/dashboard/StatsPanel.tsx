@@ -97,6 +97,18 @@ export function StatsPanel({
     },
   ];
 
+  const MS_PER_DAY = 24 * 60 * 60 * 1000; // Milliseconds in a day
+  const WINDOW_DAYS = 50; // Window size in days
+
+  const eventsNearChangePoints = events.filter((e) =>
+    changePoints.some((cp) => {
+      const eventDate = new Date(e.date).getTime();
+      const cpDate = new Date(cp.date).getTime();
+      return Math.abs(eventDate - cpDate) <= WINDOW_DAYS * MS_PER_DAY;
+    })
+  );
+  // changePoints.some((cp) => cp.date === e.date)
+  console.log("EC", events, changePoints);
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
       {stats.map((stat, index) => {
@@ -161,6 +173,38 @@ export function StatsPanel({
             This analysis covers {data.length} data points spanning from{" "}
             {new Date(data[0]?.Date).toLocaleDateString()} to{" "}
             {new Date(data[data.length - 1]?.Date).toLocaleDateString()}.
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Events Near Change Points */}
+      <Card className="shadow-elegant md:col-span-2 lg:col-span-2">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-lg">
+            <AlertTriangleIcon className="h-5 w-5" />
+            Events Near Change Points
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="">
+            {/* render events close to change points */}
+            {eventsNearChangePoints.length > 0 ? (
+              eventsNearChangePoints.map((event, index) => (
+                <div key={index} className="flex items-center justify-between">
+                  <span className="text-sm font-medium">{event.event}</span>
+                  <Badge
+                    variant="secondary"
+                    className="bg-event-marker-bg text-event-marker"
+                  >
+                    {new Date(event.date).toLocaleDateString()}
+                  </Badge>
+                </div>
+              ))
+            ) : (
+              <p className="text-sm text-muted-foreground">
+                No events near change points detected.
+              </p>
+            )}
           </div>
         </CardContent>
       </Card>

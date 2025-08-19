@@ -11,9 +11,7 @@ import {
 export function OilDashboard() {
   // Generate price data
   // const allPriceData = useMemo(() => generatePriceData(), []);
-  console.log("Generating price data...", generatePriceData);
   const allPriceData = generatePriceData;
-  console.log("Generated price data:", allPriceData);
   // Filter states
   const [startDate, setStartDate] = useState("1987-05-20");
   const [endDate, setEndDate] = useState("2022-09-30");
@@ -31,7 +29,6 @@ export function OilDashboard() {
     const fetchPrice = async () => {
       setIsLoadingPrice(true);
       const price = await fetchRealOilPrice();
-      console.log("Fetched real-time price:", price);
       setRealTimePrice(price);
       setIsLoadingPrice(false);
     };
